@@ -1,3 +1,5 @@
+//最简单的window open方法
+window.open('url')
 //导出下载文件的方法,参数是请求后的数据.
  const handleExport = (data)=>{
     const url = window.URL.createObjectURL(new Blob([data]));
@@ -36,7 +38,6 @@
       document.body.appendChild(a);
       a.click();
       a.parentNode.removeChild(a);
-      // window.open('pm/info/export/download/' + fileIndex + '?access_token=' + this.$store.getters.access_token.access_token)
     },
     
     
