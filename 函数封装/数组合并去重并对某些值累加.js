@@ -15,3 +15,20 @@ combineObjectInList (arr, item, list) {   //数组去除重复，item为重�
       }
       return a
     }
+
+copyObj (obj) {          //obj arr 对象的克隆（区分于指针赋值）
+      if (obj.constructor == Array) {
+        var a = []
+        for (var i in obj) {
+          a.push(obj[i])
+        }
+        return a
+      } else {
+        var o = {}
+        for (var i in obj) {
+          o[i] = obj[i]
+        }
+        return o
+      }
+
+    }
