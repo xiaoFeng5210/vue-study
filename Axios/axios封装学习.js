@@ -87,18 +87,4 @@ service.interceptors.response.use(
           params
       })
   }
-//异步下载模式
-  var a = document.createElement('a');
-      a.setAttribute('href','pm/info/export/download/' + fileIndex + '?access_token=' + this.$store.getters.access_token.access_token );
-      a.setAttribute('style', 'display:none');
-      a.setAttribute('target', '_blank');
-      a.setAttribute('download', '导出订单.csv'); //注意，一定要加这个
-      document.body.appendChild(a);
-      a.click();
-      a.parentNode.removeChild(a);
 
-//数组排序
-  var  a = ['1','2','3']
-  a.sort(function(a,b){
-    return a - b
-  })
