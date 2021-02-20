@@ -39,5 +39,36 @@ window.open('url')
       a.click();
       a.parentNode.removeChild(a);
     },
+   // xhr 下载  
+   downFile(id) {
+    const xhr = new XMLHttpRequest();
+    this.fielObj = {
+      projectId: this.projectId,
+      assetId: id
+    };
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const A = this;
+    xhr.open('post', 'api/project/getAssetFile');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + JSON.parse(sessionStorage.getItem('ele3d-client-authenticationtoken')));
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.responseType = 'blob';
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const blob = new Blob([xhr.response]);
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.style.display = 'none';
+        const downlaodFileName = xhr.getResponseHeader('Content-Disposition').split('=')[1];
+        link.setAttribute('download', decodeURIComponent(downlaodFileName));
+        link.click();
+        window.URL.revokeObjectURL(url);
+        A.toastr.success('文件下载成功！');
+      }
+    };
+    // 发送请求
+    xhr.send(JSON.stringify(this.fielObj));
+  }
+  
     
     
